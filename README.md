@@ -69,7 +69,7 @@
 
 - belongs_to :user
 - belongs_to :product
-- belongs_to :shipping_address
+- has_one :shipping_address
 
 
 ## shipping_address テーブル
@@ -79,10 +79,11 @@
 | postal_code           | string     | null: false                    |
 | prefectures_id        | integer    | null:false                     | 
 | municipalities        | string     | null:false                     |
+| address               | string     | null:false                     |
 | building              | string     |                                |
 | phone_number          | string     | null: false                    |
 | purchase_record       | references | null: false, foreign_key: true |
 
 ### Association
-- has_one :purchase_record
+- belongs_to:purchase_record
 
