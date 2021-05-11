@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
     it 'passwordが空では登録できない' do
       @user.password = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include "Password is invalid"
+      expect(@user.errors.full_messages).to include 'Password is invalid'
     end
     it 'name_seiが空では登録できない' do
       @user.name_sei = ''
