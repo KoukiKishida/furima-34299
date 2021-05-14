@@ -8,11 +8,15 @@ class User < ApplicationRecord
     validates :nickname
     PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
     validates_format_of :password, with: PASSWORD_REGEX
-    validates :name_sei, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
-    validates :name_mei, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
-    validates :name_sei_kana, format: { with: /\A[ぁ-んァ-ヶー]+\z/ }
-    validates :name_mei_kana, format: { with: /\A[ぁ-んァ-ヶー]+\z/ }
-    validates :birthday
+    with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ } do
+      validates :name_sei
+      validates :name_mei
+    end
+    with_options format: { with: /\A[ぁ-んァ-ヶー]+\z/ } do
+      validates :name_sei_kana
+      validates :name_mei_kana
+    end
+  validates :birthday
   end
 
   has_many :comments
