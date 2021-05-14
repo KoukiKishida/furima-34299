@@ -12,7 +12,7 @@ class User < ApplicationRecord
       validates :name_sei
       validates :name_mei
     end
-    with_options format: { with: /\A[ぁ-んァ-ヶー]+\z/ } do
+    with_options format: { with: /\A[ァ-ヶー]+\z/ } do
       validates :name_sei_kana
       validates :name_mei_kana
     end
