@@ -56,7 +56,7 @@ RSpec.describe Product, type: :model do
       end
 
       it '販売価格は、¥300~¥9,999,999の間のみ保存可能である' do
-        @product.price = '200'
+        @product.price = 200
         @product.valid?
         expect(@product.errors.full_messages).to include 'Price must be greater than or equal to 300'
       end
@@ -66,6 +66,49 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include 'Price is not a number'
       end
+
+      it 'カテゴリー情報は1(---)では登録できない' do
+        @product.category_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include 'Category must be other than 1'
+      end
+
+      it '商品状態情報は1(---)では登録できない' do
+        @product.status_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include 'Status must be other than 1'
+      end
+
+      it '配送負担情報は1(---)では登録できない' do
+        @product.burden_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include 'Burden must be other than 1'
+      end
+
+      it '発送までの日数は1(---)では登録できない' do
+        @product.day_id = '1'
+        @product.valid?
+        expect(@product.errors.full_messages).to include 'Day must be other than 1'
+      end
+
+      it '金額は半角英数混合では登録できないこと' do
+        @product.price = '100０００'
+        @product.valid?
+        expect(@product.errors.full_messages).to include 'Price is not a number'
+      end
+
+      it '金額は半角英数混合では登録できないこと' do
+        @product.price = 'aaaaaa'
+        @product.valid?
+        expect(@product.errors.full_messages).to include 'Price is not a number'
+      end
+
+      it '販売価格は、¥300~¥9,999,999の間のみ保存可能である' do
+        @product.price = 10000000
+        @product.valid?
+        expect(@product.errors.full_messages).to include 'Price must be less than 9999999'
+      end
+
     end
   end
 end
