@@ -16,7 +16,7 @@ class User < ApplicationRecord
       validates :name_sei_kana
       validates :name_mei_kana
     end
-  validates :birthday
+    validates :birthday
   end
   # has_many :comments
   # has_many :products

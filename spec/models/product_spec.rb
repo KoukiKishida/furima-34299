@@ -28,44 +28,43 @@ RSpec.describe Product, type: :model do
       it '商品のカテゴリー情報が空では登録できない' do
         @product.category_id = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include "Category is not a number"
+        expect(@product.errors.full_messages).to include 'Category is not a number'
       end
 
       it '商品の状態についての情報が空では登録できない' do
         @product.status_id = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include "Status is not a number"
+        expect(@product.errors.full_messages).to include 'Status is not a number'
       end
 
       it '配送料の負担についての情報が空では登録できない' do
         @product.burden_id = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include "Burden is not a number"
+        expect(@product.errors.full_messages).to include 'Burden is not a number'
       end
 
       it '発送までの日数についての情報が空では登録できない' do
         @product.day_id = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include "Day is not a number"
+        expect(@product.errors.full_messages).to include 'Day is not a number'
       end
 
       it '販売価格についての情報が空では登録できない' do
         @product.price = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include "Price can't be blank", "Price is not a number"
+        expect(@product.errors.full_messages).to include "Price can't be blank", 'Price is not a number'
       end
 
       it '販売価格は、¥300~¥9,999,999の間のみ保存可能である' do
         @product.price = '200'
         @product.valid?
-        expect(@product.errors.full_messages).to include "Price must be greater than or equal to 300"
+        expect(@product.errors.full_messages).to include 'Price must be greater than or equal to 300'
       end
-
 
       it '販売価格は半角数字のみ保存可能である' do
         @product.price = '１０００'
         @product.valid?
-        expect(@product.errors.full_messages).to include "Price is not a number"
+        expect(@product.errors.full_messages).to include 'Price is not a number'
       end
     end
   end
