@@ -68,25 +68,31 @@ RSpec.describe Product, type: :model do
       end
 
       it 'カテゴリー情報は1(---)では登録できない' do
-        @product.category_id = '1'
+        @product.category_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include 'Category must be other than 1'
       end
 
       it '商品状態情報は1(---)では登録できない' do
-        @product.status_id = '1'
+        @product.status_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include 'Status must be other than 1'
       end
 
       it '配送負担情報は1(---)では登録できない' do
-        @product.burden_id = '1'
+        @product.burden_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include 'Burden must be other than 1'
       end
 
+      it '発送元の地域は1(---)では登録できない' do
+        @product.prefectures_id = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include 'Prefectures must be other than 1'
+      end
+
       it '発送までの日数は1(---)では登録できない' do
-        @product.day_id = '1'
+        @product.day_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include 'Day must be other than 1'
       end
