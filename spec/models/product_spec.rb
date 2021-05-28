@@ -10,6 +10,11 @@ RSpec.describe Product, type: :model do
       it '画像と商品名、商品説明、カテゴリー、商品状態、配送料負担、発送元の地域、発送までの日数、販売価格が存在すれば登録できる' do
         expect(@product).to be_valid
       end
+
+      it '販売価格9,999,999円であれば登録できる' do
+        @product.price = 9999999
+        expect(@product).to be_valid
+      end
     end
 
     context '商品出品がうまくいかないとき' do
@@ -112,9 +117,8 @@ RSpec.describe Product, type: :model do
       it '販売価格は、¥300~¥9,999,999の間のみ保存可能である' do
         @product.price = 10000000
         @product.valid?
-        expect(@product.errors.full_messages).to include 'Price must be less than 9999999'
+        expect(@product.errors.full_messages).to include 'Price must be less than 10000000'
       end
-
     end
   end
 end
