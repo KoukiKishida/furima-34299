@@ -15,3 +15,4 @@ class Product < ApplicationRecord
   end
   validates :category_id, :status_id, :burden_id, :prefecture_id, :day_id, numericality: { other_than: 1 }
 end
+
