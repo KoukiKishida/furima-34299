@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   before_action :find_product, only: [:index, :create, :sold_out]
   before_action :sold_out, only: [:index]
 
@@ -42,5 +43,6 @@ class OrdersController < ApplicationController
   def find_product
     @product = Product.find(params[:product_id])
   end
+  
 
 end
