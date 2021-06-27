@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   belongs_to :day
   belongs_to :user
   has_one_attached :image
+  has_one :purchase_record
 
   with_options presence: true do
   validates :image, :product_name, :description
