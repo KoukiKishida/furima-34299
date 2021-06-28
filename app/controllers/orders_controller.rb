@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_product, only: [:index, :create]
-  before_action :sold_out, only: [:index]
-  before_action :user_redirect, only: [:index, :create]
+  before_action :find_product
+  before_action :sold_out
+  before_action :user_redirect
 
   def index
     @record_address = RecordAddress.new
