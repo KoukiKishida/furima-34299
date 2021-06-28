@@ -1,13 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_product, only: [:index, :create, :sold_out]
+  before_action :find_product, only: [:index, :create]
   before_action :sold_out, only: [:index]
+  before_action :user_redirect, only: [:index, :create]
 
   def index
     @record_address = RecordAddress.new
-    if current_user == @product.user
-      redirect_to root_path
-    end
   end
 
   def create
@@ -43,6 +41,11 @@ class OrdersController < ApplicationController
   def find_product
     @product = Product.find(params[:product_id])
   end
-  
+
+  def user_redirect
+    if current_user == @product.user
+      redirect_to root_path
+    end
+  end
 
 end

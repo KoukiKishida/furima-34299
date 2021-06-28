@@ -61,6 +61,31 @@ RSpec.describe RecordAddress, type: :model do
         @record_address.valid?
         expect(@record_address.errors.full_messages).to include("Token can't be blank")
       end
+
+      it "9桁以下では登録できないこと" do
+        @record_address.phone_number = '090888888'
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it "電話番号は英数混合では登録できないこと" do
+        @record_address.phone_number = '090888888aa'
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it "user_idが空では登録できないこと" do
+        @record_address.user_id = nil
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it "product_idが空では登録できないこと" do
+        @record_address.product_id = nil
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include("Product can't be blank")
+      end
+
     end
   end
 end
